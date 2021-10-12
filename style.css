@@ -15,6 +15,13 @@ body {
   );
 }
 
+#test-btn {
+  transform: rotate(90deg);
+  position: absolute;
+  bottom: -50px;
+  left: -50px;
+}
+
 .container {
   max-width: 400px;
   margin: 50px auto;
@@ -87,13 +94,13 @@ body {
 
 h1 {
   color: rgba(51, 167, 255, 0.8);
-  margin: 0 0 10px;
+  margin: 10px 0 10px;
   font-size: 28px;
   font-weight: 400;
   text-align: center;
 }
 #myProgress {
-  width: 380px;
+  width: 350px;
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -102,4 +109,51 @@ h1 {
   height: 3px;
   background-color: rgb(51, 167, 255);
   box-shadow: 5px 0 12px 3px rgb(51, 167, 255);
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.form-control label {
+  color: #fff;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.form-control input {
+  height: 30px;
+  width: 30%;
+  background: transparent;
+  border: 2px solid rgba(51, 167, 255, 0.4);
+  border-right: none;
+}
+
+input {
+  color: #fff;
+  padding-left: 5px;
+  letter-spacing: 1px;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+
+  letter-spacing: 1px;
+}
+
+input:focus {
+  outline: none;
+}
+
+.submit-btn {
+  font-size: 22px;
+  color: #fff;
+  background: rgba(51, 167, 255, 0.2);
+  border: 2px solid rgba(51, 167, 255, 0.4);
+  border-left: none;
+  padding: 2.5px 5px;
+  cursor: pointer;
 }
