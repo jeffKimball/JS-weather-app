@@ -15,16 +15,13 @@ body {
   );
 }
 
-#test-btn {
-  transform: rotate(90deg);
-  position: absolute;
-  bottom: -50px;
-  left: -50px;
-}
-
 .container {
   max-width: 400px;
   margin: 50px auto;
+  position: relative;
+}
+
+.main {
   position: relative;
 }
 
@@ -32,13 +29,13 @@ body {
   width: 70px;
   height: 70px;
   margin: auto;
-  transform: rotate(60deg);
-  background: rgb(95, 165, 255);
+  transform: rotate(40deg);
+  background: rgb(53, 50, 255);
   background: linear-gradient(
-    305deg,
-    rgba(95, 165, 255, 1) 10%,
-    rgba(40, 113, 255, 1) 43%,
-    rgba(0, 1, 255, 1) 100%
+    332deg,
+    rgba(53, 50, 255, 1) 0%,
+    rgba(29, 26, 255, 1) 53%,
+    rgba(2, 0, 161, 1) 100%
   );
   border-radius: 0%;
   position: absolute;
@@ -85,8 +82,8 @@ body {
   left: -150px;
 }
 
-h1 {
-  color: rgba(51, 167, 255, 0.8);
+.current-temp h1 {
+  color: rgba(255, 255, 255, 0.8);
   margin: 10px 0 10px;
   font-size: 28px;
   font-weight: 400;
@@ -112,7 +109,7 @@ h1 {
 }
 
 .form-control label {
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   font-size: 18px;
   padding: 10px;
 }
@@ -143,7 +140,7 @@ input:focus {
 
 .submit-btn {
   font-size: 22px;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.8);
   background: rgba(51, 167, 255, 0.2);
   border: 2px solid rgba(51, 167, 255, 0.4);
   border-left: none;
@@ -151,15 +148,28 @@ input:focus {
   cursor: pointer;
 }
 
+.city {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 28px;
+  margin-top: 20px;
+}
 .temp {
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80px;
-  height: 80px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
-  font-size: 24px;
-  background: rgba(95, 165, 255, 0.2);
+  font-size: 50px;
+  background: rgba(95, 165, 255, 0.1);
   margin: 20px auto;
+}
+
+.weather {
+  color: rgba(255, 255, 255, 0.8);
+  text-align: center;
+  font-size: 24px;
+  margin-top: 20px;
 }

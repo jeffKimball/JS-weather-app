@@ -1,55 +1,73 @@
 
 const zipCode = document.getElementById("zip-code")
 const weather = document.querySelector(".weather") 
-const temp = document.querySelector(".temp")
+const tempDisplay = document.querySelector(".temp")
 const city = document.querySelector(".city")
 const highTemp = document.querySelector(".high")
 const lowTemp = document.querySelector(".low")
 const submitBtn = document.querySelector(".submit-btn")
 const positiveBar = document.getElementById('positive-bar')
-const testBtn = document.getElementById('test-btn')
+
 let mainTemp 
-let width = 1
+let width 
 
-//API GET on click event
+//Click event for API GET method
 submitBtn.addEventListener('click', function(){
-    fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zipCode.value + ",us&units=imperial&APPID=27eed51a41c8bb64fac757fd19284f57")
+  fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zipCode.value + ",us&units=imperial&APPID=27eed51a41c8bb64fac757fd19284f57")
     .then(res => res.json())
-    .then(data => {
-
-       mainTemp = data.main.temp
-        //Place API data in designated HTML elements
-        // weather.innerText = data.weather[0].description
-        temp.innerText = Math.floor(data.main.temp) + "°"
-        // city.innerText = data.name
-        // highTemp.innerText = Math.floor(data.main.temp_max) + "°"
-        // lowTemp.innerText = Math.floor(data.main.temp_min) + "°"
-        
-        if(mainTemp > 0){
-          setInterval(function(){setTemp(mainTemp)}, 20)
-        }
-        
-    })
-    
+    .then(data => assignWeatherData(data))
 })
 
+//Parse API data to display on page
+function assignWeatherData(data){
+  //create a function to reset all weather data first
 
+  //create data structure to hold currentTemp. highTemp, lowTemp
+  // mainTemp = data.main.temp
 
+  //Place API data in designated HTML elements
+  tempDisplay.innerText = Math.floor(data.main.temp) + "°"
+  highTemp.innerText = Math.floor(data.main.temp_max) + "°"
+  lowTemp.innerText = Math.floor(data.main.temp_min) + "°"
+  weather.innerText = data.weather[0].description
+  city.innerText = data.name
 
-
-
-//Functions
-//---------------
-
-function setTemp(mainTemp) {
-  if (width >= mainTemp) {
-    clearInterval()
-    
-  } else {
-    width++
-    positiveBar.style.width = width + "%"
-  }
+  
 }
+
+
+
+
+// submitBtn.addEventListener('click', function(){
+//     fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zipCode.value + ",us&units=imperial&APPID=27eed51a41c8bb64fac757fd19284f57")
+//     .then(res => res.json())
+//     .then(data => {
+
+//        mainTemp = data.main.temp
+//         //Place API data in designated HTML elements
+//         // weather.innerText = data.weather[0].description
+//         // temp.innerText = Math.floor(data.main.temp) + "°"
+//         // city.innerText = data.name
+//         // highTemp.innerText = Math.floor(data.main.temp_max) + "°"
+//         // lowTemp.innerText = Math.floor(data.main.temp_min) + "°"
+        
+//         if(mainTemp > 0){
+//           setInterval(function(){setTemp(mainTemp)}, 20)
+//         }
+        
+//     })
+    
+// })
+
+// function setTemp(mainTemp) {
+//   if (width >= mainTemp) {
+//     clearInterval()
+    
+//   } else {
+//     width++
+//     positiveBar.style.width = width + "%"
+//   }
+// }
 
 //Event listeners
 //---------------
