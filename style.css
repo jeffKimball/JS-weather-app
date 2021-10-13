@@ -76,13 +76,6 @@ body {
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 12px 40px 40px rgba(0, 0, 0, 0.4);
-  /* position: absolute;
-  margin: auto;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 10; */
 }
 
 .current-temp {
@@ -104,7 +97,7 @@ h1 {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-#current-bar {
+#positive-bar {
   width: 0%;
   height: 3px;
   background-color: rgb(51, 167, 255);
@@ -156,4 +149,17 @@ input:focus {
   border-left: none;
   padding: 2.5px 5px;
   cursor: pointer;
+}
+
+.temp {
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 24px;
+  background: rgba(95, 165, 255, 0.2);
+  margin: 20px auto;
 }
