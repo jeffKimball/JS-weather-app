@@ -8,7 +8,9 @@ const lowTemp = document.querySelector(".low")
 const submitBtn = document.querySelector(".submit-btn")
 const positiveBar = document.getElementById('positive-bar')
 
-  
+let incFunc
+let decFunc
+
 let width = 0
 
 //Click event for API GET method
@@ -20,9 +22,9 @@ submitBtn.addEventListener('click', function(){
 
 //Parse API data to display on page
 function assignWeatherData(data){
-  let mainTemp = data.main.temp
   
-
+  let mainTemp = data.main.temp  
+  
   //Place API data in designated HTML elements
   tempDisplay.innerText = Math.floor(data.main.temp) + "°"
   highTemp.innerText = Math.floor(data.main.temp_max) + "°"
@@ -30,24 +32,70 @@ function assignWeatherData(data){
   weather.innerText = data.weather[0].description
   city.innerText = data.name
 
+  adjustThermometer(mainTemp)
   
-  if(mainTemp > 0 && mainTemp >= (width - 1)){
-    setInterval(function(){setTemp(mainTemp)}, 25)
+}
+
+function adjustThermometer(mainTemp){
+  
+
+  if(mainTemp > 99){
+    document.querySelector('.current-temp h1').innerText = "Temp > 100"+ "°"
+    width = 0
+    positiveBar.style.width = width + "%"
+  } else if(mainTemp < 1){
+    document.querySelector('.current-temp h1').innerText = "Temp < 0"+ "°"
+    width = 0
+    positiveBar.style.width = width + "%"
+  }else if(mainTemp > 0 && mainTemp > width){    
+    incFunc = setInterval(function(){setTemp(mainTemp)}, 25)
+  }else{
+    decFunc = setInterval(function(){decrementThermometer(mainTemp)}, 25)
   }
-  
+
 }
 
 
 function setTemp(mainTemp) {
   if (width > mainTemp) {
-    clearInterval()
-    
+    clearInterval(incFunc)
+    console.log("incFunc cleared")
   } else {
     width++
-    positiveBar.style.width = width + "%"
-    console.log(width)
+    positiveBar.style.width = width + "%"    
   }
 }
+
+
+function decrementThermometer(mainTemp){
+  if (width < mainTemp) {
+        clearInterval(decFunc)
+        console.log("decFunc cleared")
+      } else {
+        width--
+        positiveBar.style.width = width + "%"
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
