@@ -9,7 +9,7 @@ const submitBtn = document.querySelector(".submit-btn")
 const positiveBar = document.getElementById('positive-bar')
 
 let mainTemp 
-let width 
+let width =1
 
 //Click event for API GET method
 submitBtn.addEventListener('click', function(){
@@ -22,8 +22,6 @@ submitBtn.addEventListener('click', function(){
 function assignWeatherData(data){
   //create a function to reset all weather data first
 
-  //create data structure to hold currentTemp. highTemp, lowTemp
-  // mainTemp = data.main.temp
 
   //Place API data in designated HTML elements
   tempDisplay.innerText = Math.floor(data.main.temp) + "°"
@@ -32,52 +30,25 @@ function assignWeatherData(data){
   weather.innerText = data.weather[0].description
   city.innerText = data.name
 
+  mainTemp = data.main.temp
+  if(mainTemp > 0){
+    setInterval(function(){setTemp(mainTemp)}, 20)
+  }
   
+}
+
+
+function setTemp(mainTemp) {
+  if (width >= mainTemp) {
+    clearInterval()
+    
+  } else {
+    width++
+    positiveBar.style.width = width + "%"
+  }
 }
 
 
 
 
-// submitBtn.addEventListener('click', function(){
-//     fetch("https://api.openweathermap.org/data/2.5/weather?zip=" + zipCode.value + ",us&units=imperial&APPID=27eed51a41c8bb64fac757fd19284f57")
-//     .then(res => res.json())
-//     .then(data => {
 
-//        mainTemp = data.main.temp
-//         //Place API data in designated HTML elements
-//         // weather.innerText = data.weather[0].description
-//         // temp.innerText = Math.floor(data.main.temp) + "°"
-//         // city.innerText = data.name
-//         // highTemp.innerText = Math.floor(data.main.temp_max) + "°"
-//         // lowTemp.innerText = Math.floor(data.main.temp_min) + "°"
-        
-//         if(mainTemp > 0){
-//           setInterval(function(){setTemp(mainTemp)}, 20)
-//         }
-        
-//     })
-    
-// })
-
-// function setTemp(mainTemp) {
-//   if (width >= mainTemp) {
-//     clearInterval()
-    
-//   } else {
-//     width++
-//     positiveBar.style.width = width + "%"
-//   }
-// }
-
-//Event listeners
-//---------------
-// testBtn.addEventListener('click', () =>{  
-//   if (currentDegrees === 0) {
-//     currentDegrees = 1    
-//     setInterval(setTemp, 20)    
-//   }
-// })
-
-
-
-//let currentDegrees = 0;
