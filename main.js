@@ -8,8 +8,8 @@ const lowTemp = document.querySelector(".low")
 const submitBtn = document.querySelector(".submit-btn")
 const positiveBar = document.getElementById('positive-bar')
 
-let mainTemp 
-let width =1
+  
+let width = 0
 
 //Click event for API GET method
 submitBtn.addEventListener('click', function(){
@@ -20,8 +20,8 @@ submitBtn.addEventListener('click', function(){
 
 //Parse API data to display on page
 function assignWeatherData(data){
-  //create a function to reset all weather data first
-
+  let mainTemp = data.main.temp
+  
 
   //Place API data in designated HTML elements
   tempDisplay.innerText = Math.floor(data.main.temp) + "°"
@@ -30,23 +30,26 @@ function assignWeatherData(data){
   weather.innerText = data.weather[0].description
   city.innerText = data.name
 
-  mainTemp = data.main.temp
-  if(mainTemp > 0){
-    setInterval(function(){setTemp(mainTemp)}, 20)
+  
+  if(mainTemp > 0 && mainTemp >= (width - 1)){
+    setInterval(function(){setTemp(mainTemp)}, 25)
   }
   
 }
 
 
 function setTemp(mainTemp) {
-  if (width >= mainTemp) {
+  if (width > mainTemp) {
     clearInterval()
     
   } else {
     width++
     positiveBar.style.width = width + "%"
+    console.log(width)
   }
 }
+
+
 
 
 
