@@ -1,4 +1,3 @@
-
 const zipCode = document.getElementById("zip-code")
 const weather = document.querySelector(".weather") 
 const tempDisplay = document.querySelector(".temp")
@@ -8,9 +7,11 @@ const lowTemp = document.querySelector(".low")
 const submitBtn = document.querySelector(".submit-btn")
 const positiveBar = document.getElementById('positive-bar')
 
+// variables for setInterval functions
 let incFunc
 let decFunc
 
+// variable for thermometer animation
 let width = 0
 
 //Click event for API GET method
@@ -23,7 +24,9 @@ submitBtn.addEventListener('click', function(){
 //Parse API data to display on page
 function assignWeatherData(data){
   
-  let mainTemp = data.main.temp  
+  // get current temp 
+  let mainTemp = data.main.temp 
+  
   
   //Place API data in designated HTML elements
   tempDisplay.innerText = Math.floor(data.main.temp) + "°"
@@ -36,46 +39,54 @@ function assignWeatherData(data){
   
 }
 
+// takes current temperature and animates the thermometer 
+// alerts for temperatures outside of range [1..99]
 function adjustThermometer(mainTemp){
   
 
-  if(mainTemp > 99){
+  if(mainTemp > 99) // display message for out of range temp > 100
+  {
     document.querySelector('.current-temp h1').innerText = "Temp > 100"+ "°"
-    width = 0
-    positiveBar.style.width = width + "%"
-  } else if(mainTemp < 1){
+    positiveBar.style.width = 0 
+    document.querySelector('#myProgress').style.backgroundColor = 'rgba(255, 48, 33, 0.5)'
+  } 
+  else if(mainTemp < 1) // display message for out of range temp < 0
+  {
     document.querySelector('.current-temp h1').innerText = "Temp < 0"+ "°"
-    width = 0
-    positiveBar.style.width = width + "%"
-  }else if(mainTemp > 0 && mainTemp > width){    
-    incFunc = setInterval(function(){setTemp(mainTemp)}, 25)
-  }else{
+    positiveBar.style.width = 0
+    document.querySelector('#myProgress').style.backgroundColor = 'rgba(63, 110, 252)'
+  }
+  else if(mainTemp > 0 && mainTemp > width) // increment thermometer
+  {    
+    incFunc = setInterval(function(){incrementThermometer(mainTemp)}, 25)
+  }
+  else  // decrement thermometer
+  {
     decFunc = setInterval(function(){decrementThermometer(mainTemp)}, 25)
   }
 
 }
 
-
-function setTemp(mainTemp) {
+// call from setInterval increments thermometer
+function incrementThermometer(mainTemp) {
   if (width > mainTemp) {
-    clearInterval(incFunc)
-    console.log("incFunc cleared")
+    clearInterval(incFunc)    
   } else {
     width++
     positiveBar.style.width = width + "%"    
   }
 }
 
-
+// call from setInterval decrements thermometer
 function decrementThermometer(mainTemp){
   if (width < mainTemp) {
         clearInterval(decFunc)
-        console.log("decFunc cleared")
       } else {
         width--
         positiveBar.style.width = width + "%"
     }
 }
+
 
 
 
